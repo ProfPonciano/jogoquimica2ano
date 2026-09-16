@@ -1,0 +1,1003 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071923,
+            #102f3c,
+            #071923
+        );
+}
+
+
+/* ================================
+   TELAS
+   ================================ */
+
+.tela {
+    display: none;
+    min-height: 100vh;
+}
+
+.tela.ativa {
+    display: flex;
+}
+
+
+/* ================================
+   TELA INICIAL
+   ================================ */
+
+#telaInicial {
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.painel-inicial {
+    width: min(760px, 95%);
+    padding: 45px;
+
+    text-align: center;
+
+    background: rgba(8, 20, 25, 0.96);
+
+    border: 2px solid #d6b45c;
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 40px rgba(214, 180, 92, 0.30);
+}
+
+.painel-inicial h1 {
+    margin-top: 0;
+
+    font-size: 2.6rem;
+
+    color: #ffd66b;
+}
+
+.painel-inicial h2 {
+    color: #72e6b0;
+}
+
+.painel-inicial p {
+    line-height: 1.7;
+}
+
+
+/* ================================
+   BOTÕES
+   ================================ */
+
+button {
+    border: none;
+
+    padding: 13px 20px;
+    margin-top: 15px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176d7c,
+            #0b3944
+        );
+
+    transition:
+        transform 0.2s,
+        filter 0.2s;
+}
+
+button:hover:not(:disabled) {
+    transform: scale(1.03);
+    filter: brightness(1.15);
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+/* ================================
+   CABEÇALHO
+   ================================ */
+
+#telaJogo {
+    flex-direction: column;
+}
+
+.cabecalho {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 15px 30px;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    z-index: 20;
+}
+
+.titulo-jogo h1 {
+    margin: 0;
+
+    color: #ffd66b;
+}
+
+.titulo-jogo p {
+    margin: 5px 0 0;
+
+    color: #72e6b0;
+}
+
+
+/* ================================
+   ESTABILIDADE
+   ================================ */
+
+.estabilidade {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+#vidas {
+    display: flex;
+
+    gap: 5px;
+}
+
+.vida {
+    font-size: 1.7rem;
+
+    color: #72e6b0;
+
+    transition:
+        opacity 0.3s,
+        transform 0.3s,
+        filter 0.3s;
+}
+
+.vida.perdida {
+    opacity: 0.15;
+
+    filter: grayscale(1);
+
+    transform: scale(0.75);
+}
+
+
+/* ================================
+   SELOS
+   ================================ */
+
+.codigo-area {
+    text-align: center;
+}
+
+#fragmentos {
+    margin-top: 5px;
+
+    color: #ffd66b;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    min-width: 100px;
+}
+
+
+/* ================================
+   ÁREA PRINCIPAL
+   ================================ */
+
+.area-principal {
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(360px, 0.8fr);
+
+    gap: 20px;
+
+    padding: 20px;
+}
+
+
+/* ================================
+   MAPA
+   ================================ */
+
+.mapa-area {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    min-width: 0;
+}
+
+#mapaContainer {
+    position: relative;
+
+    width: min(900px, 100%);
+
+    line-height: 0;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#mapa {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+#jogador {
+    position: absolute;
+
+    width: 7%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 10;
+
+    transition:
+        left 0.7s ease,
+        top 0.7s ease;
+
+    pointer-events: none;
+}
+
+#entropia {
+    position: absolute;
+
+    width: 12%;
+
+    right: 3%;
+    bottom: 3%;
+
+    opacity: 0.25;
+
+    z-index: 8;
+
+    transition:
+        opacity 0.5s,
+        transform 0.5s;
+}
+
+#entropia.ativa {
+    opacity: 1;
+
+    transform: scale(1.08);
+}
+
+
+/* ================================
+   MARCADORES
+   ================================ */
+
+.marcador {
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: #ffffff;
+
+    background: rgba(8, 20, 25, 0.9);
+
+    border: 2px solid #d6b45c;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 6;
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
+}
+
+.marcador.atual {
+    background: #176d7c;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.25);
+
+    box-shadow:
+        0 0 15px #72e6b0;
+}
+
+.marcador.concluido {
+    background: #315f4c;
+
+    border-color: #72e6b0;
+}
+
+
+/* ================================
+   EFEITOS
+   ================================ */
+
+#efeitoVisual {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 30;
+}
+
+.reacao {
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    border: 5px solid #72e6b0;
+
+    animation:
+        explosaoVerde 0.8s ease forwards;
+}
+
+.explosao {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    left: 0;
+    top: 0;
+
+    background:
+        rgba(130, 60, 180, 0.25);
+
+    animation:
+        explosaoRoxa 0.8s ease forwards;
+}
+
+@keyframes explosaoVerde {
+    from {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(0.3);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(2);
+    }
+}
+
+@keyframes explosaoRoxa {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+/* ================================
+   PAINEL LATERAL
+   ================================ */
+
+.painel-lateral {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    min-width: 0;
+}
+
+.narrativa {
+    padding: 18px;
+
+    background:
+        rgba(0, 0, 0, 0.45);
+
+    border-left:
+        4px solid #72e6b0;
+
+    border-radius: 10px;
+
+    line-height: 1.6;
+}
+
+.narrativa p {
+    margin: 0;
+}
+
+
+/* ================================
+   CARD
+   ================================ */
+
+.card-desafio {
+    position: relative;
+
+    min-height: 430px;
+
+    perspective: 1000px;
+}
+
+.card-frente,
+.card-verso {
+    position: absolute;
+
+    width: 100%;
+    min-height: 430px;
+
+    padding: 25px;
+
+    background:
+        rgba(8, 20, 25, 0.96);
+
+    border:
+        2px solid
+        rgba(214, 180, 92, 0.65);
+
+    border-radius: 18px;
+
+    backface-visibility: hidden;
+
+    transition:
+        transform 0.6s ease;
+}
+
+.card-frente {
+    transform: rotateY(0deg);
+}
+
+.card-verso {
+    transform: rotateY(180deg);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.card-desafio.virado .card-frente {
+    transform: rotateY(-180deg);
+}
+
+.card-desafio.virado .card-verso {
+    transform: rotateY(0deg);
+}
+
+
+/* ================================
+   CABEÇALHO DO DESAFIO
+   ================================ */
+
+.cabecalho-desafio {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.cabecalho-desafio h2 {
+    margin-top: 0;
+
+    color: #ffd66b;
+}
+
+.dificuldade-badge {
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+
+    background: #315f4c;
+}
+
+.dificuldade-médio {
+    background: #8b7130;
+}
+
+.dificuldade-difícil {
+    background: #713b72;
+}
+
+
+/* ================================
+   PERGUNTA
+   ================================ */
+
+#pergunta {
+    font-size: 1.05rem;
+
+    line-height: 1.55;
+}
+
+
+/* ================================
+   ALTERNATIVAS
+   ================================ */
+
+#alternativas,
+#alternativasRecuperacao {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.progresso-desafios {
+    margin-bottom: 5px;
+
+    color: #72e6b0;
+
+    font-size: 0.85rem;
+}
+
+.alternativa {
+    width: 100%;
+
+    margin: 0;
+
+    text-align: left;
+
+    background:
+        rgba(23, 109, 124, 0.25);
+
+    border:
+        1px solid
+        rgba(114, 230, 176, 0.25);
+}
+
+.alternativa:hover {
+    background:
+        rgba(23, 109, 124, 0.5);
+}
+
+.alternativa.selecionada {
+    background: #176d7c;
+
+    border-color: #72e6b0;
+
+    box-shadow:
+        0 0 10px rgba(114, 230, 176, 0.25);
+}
+
+
+/* ================================
+   RESULTADO
+   ================================ */
+
+.resultado-acerto {
+    color: #72e6b0;
+}
+
+.resultado-erro {
+    color: #c18bd0;
+}
+
+.selo-conquistado {
+    display: inline-block;
+
+    padding: 10px 15px;
+
+    margin-top: 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(114, 230, 176, 0.12);
+
+    color: #72e6b0;
+
+    font-weight: bold;
+}
+
+
+/* ================================
+   ÚLTIMA CHANCE
+   ================================ */
+
+#telaUltimaChance {
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+.painel-ultima-chance {
+    width: min(700px, 95%);
+
+    padding: 40px;
+
+    text-align: center;
+
+    background:
+        rgba(30, 12, 35, 0.96);
+
+    border:
+        2px solid #c18bd0;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 40px rgba(130, 60, 180, 0.35);
+}
+
+.painel-ultima-chance h1 {
+    color: #d59ce3;
+}
+
+.desafio-recuperacao {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.35);
+
+    border-radius: 15px;
+}
+
+
+/* ================================
+   DERROTA
+   ================================ */
+
+#telaDerrota {
+    position: relative;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: #10071a;
+}
+
+.mapa-derrota {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.mapa-derrota img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.filtro-entropia {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(70, 10, 90, 0.72);
+}
+
+.entropia-final {
+    position: relative;
+
+    z-index: 10;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+.entropia-final img {
+    width: min(280px, 50vw);
+}
+
+.fala-entropia {
+    max-width: 600px;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(20, 5, 25, 0.88);
+}
+
+.fala-entropia h1 {
+    color: #d59ce3;
+}
+
+
+/* ================================
+   PORTAL
+   ================================ */
+
+#telaPortal {
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+.painel-portal {
+    width: min(700px, 95%);
+
+    padding: 40px;
+
+    text-align: center;
+
+    background:
+        rgba(8, 20, 25, 0.96);
+
+    border:
+        2px solid #d6b45c;
+
+    border-radius: 20px;
+}
+
+.painel-portal h1 {
+    color: #ffd66b;
+}
+
+.senha-referencia {
+    margin: 25px 0;
+
+    padding: 15px;
+
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    letter-spacing: 7px;
+
+    color: #72e6b0;
+
+    background:
+        rgba(114, 230, 176, 0.08);
+
+    border-radius: 10px;
+}
+
+#campoSenha {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 2px solid #315f4c;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 1rem;
+
+    color: white;
+
+    background: #071923;
+}
+
+#campoSenha:focus {
+    border-color: #72e6b0;
+}
+
+#comparacaoSenha {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 20px;
+}
+
+.caractere {
+    padding: 7px 9px;
+
+    border-radius: 5px;
+
+    background: #321b38;
+}
+
+.caractere.correto {
+    color: #72e6b0;
+
+    background: #173d2e;
+}
+
+.caractere.incorreto {
+    color: #d59ce3;
+
+    background: #402044;
+}
+
+#mensagemPortal {
+    margin-top: 20px;
+
+    line-height: 1.5;
+}
+
+
+/* ================================
+   FINAL
+   ================================ */
+
+#telaFinal {
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+.painel-final {
+    width: min(750px, 95%);
+
+    padding: 45px;
+
+    text-align: center;
+
+    background:
+        rgba(8, 20, 25, 0.96);
+
+    border:
+        2px solid #72e6b0;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 40px rgba(114, 230, 176, 0.25);
+}
+
+.painel-final h1 {
+    color: #ffd66b;
+}
+
+#estatisticasFinais {
+    margin: 25px 0;
+
+    padding: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.3);
+
+    border-radius: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* ================================
+   RESPONSIVIDADE
+   ================================ */
+
+@media (max-width: 950px) {
+
+    .area-principal {
+        grid-template-columns: 1fr;
+    }
+
+    .painel-lateral {
+        width: 100%;
+    }
+
+    .card-desafio {
+        min-height: 400px;
+    }
+
+    .card-frente,
+    .card-verso {
+        min-height: 400px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .cabecalho {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 15px;
+    }
+
+    .area-principal {
+        padding: 10px;
+    }
+
+    .painel-inicial,
+    .painel-portal,
+    .painel-final,
+    .painel-ultima-chance {
+        padding: 25px;
+    }
+
+    .painel-inicial h1 {
+        font-size: 2rem;
+    }
+
+}
